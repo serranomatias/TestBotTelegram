@@ -3,11 +3,9 @@ const { message } = require('telegraf/filters');
 require('dotenv').config();
 const fs = require('fs');
 const axios = require('axios');
-const token = process.env.TOKEN;
 
 
-console.log(token);
-const bot = new Telegraf(token);
+const bot = new Telegraf(process.env.TOKEN);
 
 function random(number) {
     return Math.floor(Math.random() * (number + 1));
@@ -60,16 +58,16 @@ bot.command('advancerandom', (ctx)=>{
     }
 })
 
-bot.on(message('text'), (ctx)=> {
-    const msg = ctx.update.message.text;
-    if(msg.includes('melu')){
-        ctx.reply('La mas hermosa del mundo siempre. Por supuesto.');
-    }
+// bot.on(message('text'), (ctx)=> {
+//     const msg = ctx.update.message.text;
+//     if(msg.includes('melu')){
+//         ctx.reply('La mas hermosa del mundo siempre. Por supuesto.');
+//     }
     
-})
+// })
 
 bot.on(message('sticker'), (ctx) => ctx.reply('👍'));
-bot.hears('hi', (ctx) => ctx.reply('Hey there'));
+bot.hears('youtube', (ctx) => ctx.reply('Hey there'));
 
 bot.on('photo', (ctx)=> {
     const fileId = ctx.update.message.photo[1].file_id
@@ -83,15 +81,6 @@ bot.on('photo', (ctx)=> {
 bot.command('sendphoto', (ctx)=> {
     ctx.replyWithPhoto({source: 'photo.jpg'});
 })
-
-
-bot.on('text', (ctx) => {
-    // Explicit usage
-    // await ctx.telegram.sendMessage(ctx.message.chat.id, `Hello ${ctx.state.role}`);
-    console.log('Prueba');
-    // Using context shortcut
-    ctx.reply(`Hello ${ctx.state.role}`);
-  });
 
 
 bot.launch();
