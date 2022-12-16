@@ -1,6 +1,6 @@
 # Telegram Bot
 
-In this case we are using javascript and Nodejs for develop the bot. Telegraf.js is a library created by Telegram. 
+In this case we are using javascript and Nodejs for develop the bot. Telegraf.js is a library that will helps to make it easy. 
 First of all we need our api token of Telegram bot.
 
 ## Get Bot Token Api
