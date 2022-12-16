@@ -10,16 +10,27 @@ const bot = new Telegraf(process.env.BOT_TOKEN);
 
 bot.start((ctx)=> {
     const userFirstName = ctx.update.message.from.first_name;
-    ctx.reply(`Hello ${userFirstName}`);
-    console.log(ctx);
-    console.log(ctx.update.message.from.first_name);
+    ctx.reply(`Welcome ${userFirstName}`);
 });
 bot.help((ctx)=> {
-    ctx.reply("Ask for help to another person...");
+    ctx.reply("If you need help with bot config can you access to https://telegraf.js.org/index.html or send me a message on https://www.linkedin.com/in/serrano-matias/");
 });
 
 bot.on(message('sticker'), (ctx) => ctx.reply('👍'));
-bot.hears('youtube', (ctx) => ctx.reply('Hey there'));
+bot.hears('bot', (ctx) => ctx.reply('to who you call bot? human...'));
+bot.on(message('text'), (ctx)=> {
+    const msg = ctx.update.message.text;
+    console.log(ctx.from);
+    if(msg.includes('podcast')){
+        if(ctx.from.language_code == 'es'){
+            ctx.reply('El nuevo podcast esta disponible en nuestros canales de Youtube, Spotify, Apple iTunes...');
+        } else {
+            ctx.reply('The new podcast is available on our channels like Youtube, Spotify, Apple iTunes...');
+        }
+        
+    }
+    
+})
 
 function random(number) {
     return Math.floor(Math.random() * (number + 1));
@@ -27,7 +38,7 @@ function random(number) {
 
 
 bot.command('random', (ctx)=>{
-    ctx.reply(random(100) + ' tu numero');
+    ctx.reply(`Your random number is ${random(100)}`);
 });
 
 bot.command('advancerandom', (ctx)=>{
@@ -35,7 +46,7 @@ bot.command('advancerandom', (ctx)=>{
     const randomNumber = Number(message.split(' ')[1]);
 
     if(isNaN(randomNumber) || randomNumber <= 0){
-        ctx.reply('Porfavor escribe un numero que sea valido');
+        ctx.reply('Please enter a valid number.');
     } else {
         ctx.reply(random(randomNumber) + '');
     }
@@ -49,11 +60,11 @@ const downloadImage = (url, image_path, ctx) =>
             response.data
             .pipe(fs.createWriteStream(image_path))
             .on("finish", () => {
-                ctx.reply('almacenada correctamente');
+                ctx.reply('Save successfully');
                 resolve();
             })
             .on('error', (e) => {
-                ctx.reply('No pude almacenarla correctamente');
+                ctx.reply("Don't save successfully");
                 reject(e);
             });
         })
@@ -65,7 +76,7 @@ const downloadImage = (url, image_path, ctx) =>
         ctx.telegram.getFileLink(fileId).then((response)=>{
             downloadImage(response.href, './photo.jpg', ctx)
         })
-        ctx.reply('Me has enviado una foto');
+        ctx.reply('You send me a photo');
     })
     
     bot.command('sendphoto', (ctx)=> {
@@ -76,13 +87,7 @@ const downloadImage = (url, image_path, ctx) =>
 
 
 
-// bot.on(message('text'), (ctx)=> {
-//     const msg = ctx.update.message.text;
-//     if(msg.includes('melu')){
-//         ctx.reply('La mas hermosa del mundo siempre. Por supuesto.');
-//     }
-    
-// })
+
 
 
 
