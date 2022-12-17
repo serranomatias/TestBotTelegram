@@ -80,3 +80,10 @@ bot.launch();
 - For the first test. Run in your terminal ```node main.js```
 - Go to your Telegram app, search your bot chat and write ```/start```
 - After a change remember kill your process and run ```node main.js``` again.
+
+
+## Bot on Groups
+
+If you want use your bot on a group:
+- Invite the bot to the group
+- Give admin permissions to him
