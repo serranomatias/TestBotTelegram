@@ -1,6 +1,6 @@
 # Telegram Bot
 
-In this case we are using javascript and Nodejs for develop the bot. Telegraf.js is a library created by Telegram. 
+In this case we are using javascript and Nodejs for develop the bot. Telegraf.js is a library that will helps to make it easy. 
 First of all we need our api token of Telegram bot.
 
 ## Get Bot Token Api
@@ -80,3 +80,10 @@ bot.launch();
 - For the first test. Run in your terminal ```node main.js```
 - Go to your Telegram app, search your bot chat and write ```/start```
 - After a change remember kill your process and run ```node main.js``` again.
+
+
+## Bot on Groups
+
+If you want use your bot on a group:
+- Invite the bot to the group
+- Give admin permissions to him
